@@ -3,6 +3,7 @@ from telepot.loop import MessageLoop
 import variabiles, utils
 import time, os
 
+
 def handle(msg): #what to do if new message is received
     content_type, chat_type, chat_id = telepot.glance(msg)
     text = msg['text'].lower()
