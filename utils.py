@@ -1,5 +1,6 @@
 import psutil
 import variabiles
+import os
 
 def getProc():
     processlist = list()
@@ -12,3 +13,11 @@ def getProc():
         except:
             pass
     return processlist
+
+def killProc(target):
+    procs = getProc()
+    os.kill(target.os.getpid(), 1) if target in procs else print("Processo non trovato")
+
+killProc("google chrome")
+
+#print(getProc())

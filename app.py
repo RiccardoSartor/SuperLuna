@@ -3,6 +3,8 @@ from telepot.loop import MessageLoop
 import variabiles, utils
 import time, os
 
+#variabiles
+testing = True #definisci quale token tg utilizzare
 
 def handle(msg): #what to do if new message is received
     content_type, chat_type, chat_id = telepot.glance(msg)
@@ -22,7 +24,7 @@ def handle(msg): #what to do if new message is received
         command = "taskkill /f /im " + text.split(' ')[1]
         os.system(command)
     
-bot = telepot.Bot(variabiles.token)
+bot = telepot.Bot(variabiles.token_test if testing else variabiles.token_public)
 MessageLoop(bot, handle).run_as_thread()
 print(f'Logged in')
 while 1:
