@@ -16,7 +16,7 @@ def getProc():
 
 def killProc(target):
     procs = getProc()
-    os.kill(target.os.getpid(), 1) if target in procs else print("Processo non trovato")
+    #os.kill(target.os.getpid(), 1) if target in procs else print("Processo non trovato")
 
 killProc("google chrome")
 

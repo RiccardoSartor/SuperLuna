@@ -1,7 +1,12 @@
 import telepot
 from telepot.loop import MessageLoop
-import variabiles, utils
-import time, os
+import variabiles
+import time, os, platform
+if(platform.system() == "Darwin"):
+    import OSXUtility as utility
+else:
+    import WindowsUtility as utility
+
 
 #variabiles
 testing = True #definisci quale token tg utilizzare
