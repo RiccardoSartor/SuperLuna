@@ -31,8 +31,23 @@ def handle(msg): #what to do if new message is received
             txt += str(item[0]) + " " + str(item[1]) + '\n'
         bot.sendMessage(chat_id, txt)
     elif 'kill' in text:
-        utility.killProc(text.split(' ')[1])
-    
+        if len(text.split(" ")) == 2:
+            utility.killProc(text.split(' ')[1])
+            bot.sendMessage(chat_id, "👍")
+        else:
+            bot.sendMessage(chat_id, "Errore, comando: 'kill [filename]'")
+    elif text == 'shutdown':
+        utility.shutdown()
+        bot.sendMessage(chat_id, "👍")
+    elif text == "reboot":
+        utility.reboot()
+        bot.sendMessage(chat_id, "👍")
+    elif "link" in text:
+        if len(text.split(" ")) == 2:
+            utility.openLink(text.split(" ")[1])
+        else:
+            bot.sendMessage(chat_id, "Errore, comando: 'link [example.com]")
+
 bot = telepot.Bot(variabiles.token_test if testing else variabiles.token_public)
 MessageLoop(bot, handle).run_as_thread()
 print(f'Logged in')
