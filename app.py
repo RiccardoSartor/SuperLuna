@@ -1,7 +1,7 @@
 import telepot
 from telepot.loop import MessageLoop
 import variabiles
-import time, os, platform
+import time, platform
 if(platform.system() == "Darwin"):
     import OSXUtility as utility
 else:
@@ -15,19 +15,23 @@ def handle(msg): #what to do if new message is received
     content_type, chat_type, chat_id = telepot.glance(msg)
     text = msg['text'].lower()
     
-    
-    if 'ping' == text:
+    if '/start' == text:
+        bot.sendMessage(chat_id, "Luna Balena!")
+    elif 'ping' == text:
         print(f"Ping from @{msg['from']['username']}")
         bot.sendMessage(chat_id, 'pong')
     elif 'proc' == text:
-        procs = utils.getProc()
-        txt = ''
+        procs = utility.processes()
+        counter = 11
+        txt = 'Pid | Name\n'
         for item in procs:
-            txt += item+'\n'
+            if len(txt) + len(str(item[0])) + len(item[1]) + 2 > 4096: #to avoid telegram length message limit
+                bot.sendMessage(chat_id, txt)
+                txt = ''
+            txt += str(item[0]) + " " + str(item[1]) + '\n'
         bot.sendMessage(chat_id, txt)
     elif 'kill' in text:
-        command = "taskkill /f /im " + text.split(' ')[1]
-        os.system(command)
+        utility.killProc(text.split(' ')[1])
     
 bot = telepot.Bot(variabiles.token_test if testing else variabiles.token_public)
 MessageLoop(bot, handle).run_as_thread()
