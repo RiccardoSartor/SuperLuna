@@ -45,6 +45,11 @@ def reboot():
 def openLink(link):
     os.system(f'open -a "Safari" "http://{link}"')
 
+def setDns(interface: str, ip: str):
+    os.system(f"networksetup -setdnsservers {interface} {ip}")
+
+def setDnsLoopback():
+    setDns('Wi-Fi', '127.0.0.1')
 
 
 print("OSX Utility loaded")
