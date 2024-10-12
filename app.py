@@ -2,7 +2,7 @@ import telepot
 from telepot.loop import MessageLoop
 import variabiles
 import time, platform
-if(platform.system() == "Darwin"):
+if platform.system() == "Darwin":
     import OSXUtility as utility
 else:
     import WindowsUtility as utility
@@ -65,7 +65,12 @@ def handle(msg): #what to do if new message is received
             bot.sendMessage(chat_id, "👍")
         else:
             bot.sendMessage(chat_id, "Errore. per cambiare dns scrivere: setdns [ip] [interface]\ninterfacce per macos: Wifi, iPhone")
-        
+    
+    
+    elif text == '/help':
+        bot.sendMessage(chat_id, variabiles.help)
+    else:
+        bot.sendMessage(chat_id, f"Errore.\n{variabiles.help}")
 bot = telepot.Bot(variabiles.token_test if testing else variabiles.token_public)
 MessageLoop(bot, handle).run_as_thread()
 print(f'Logged in')
