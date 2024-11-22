@@ -1,1 +1,1 @@
-update di LunaBalena, compatibile sia con OSX e Windows
+An easy way to control windows, but not yours :)
